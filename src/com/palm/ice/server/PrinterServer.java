@@ -2,6 +2,8 @@ package com.palm.ice.server;
 
 import java.util.Map;
 
+import com.palm.ice.server.impl.PrinterServerImpl;
+
 import Ice.InitializationData;
 import Ice.Properties;
 import Ice.Util;
@@ -23,16 +25,24 @@ public class PrinterServer {
 	 * 启动server
 	 */
 	public void startServer() {
-		InitializationData id = new InitializationData();
-		id.properties = craeteProperties();
-		Ice.Communicator ic = Ice.Util.initialize(id);
-		Ice.ObjectAdapter adapter = ic.createObjectAdapterWithEndpoints(
-				"adapter", protocol + " -h " + host + " -p " + port);
-		Ice.Object servant = new PrinterServiceI();
-		adapter.add(servant, ic.stringToIdentity(name));
-		adapter.activate();
-		ic.waitForShutdown();
-		ic.destroy();
+		Ice.Communicator ic = null;
+		try {
+			InitializationData id = new InitializationData();
+			id.properties = craeteProperties();
+			ic = Ice.Util.initialize(id);
+			Ice.ObjectAdapter adapter = ic.createObjectAdapterWithEndpoints(
+					"adapter", protocol + " -h " + host + " -p " + port);
+			Ice.Object servant = new PrinterServerImpl();
+			adapter.add(servant, ic.stringToIdentity(name));
+			adapter.activate();
+			ic.waitForShutdown();
+			ic.destroy();
+		} finally {
+			if (ic != null) {
+				ic.destroy();
+			}
+		}
+
 	}
 
 	/**

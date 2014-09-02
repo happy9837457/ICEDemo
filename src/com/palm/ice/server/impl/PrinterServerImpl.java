@@ -1,4 +1,4 @@
-package com.palm.ice.server;
+package com.palm.ice.server.impl;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import com.palm.ice.ice._PrinterDisp;
  * @author weixiang.qin
  * 
  */
-public class PrinterServiceI extends _PrinterDisp {
+public class PrinterServerImpl extends _PrinterDisp {
 	private static final long serialVersionUID = -3029701987943534795L;
 
 	@Override

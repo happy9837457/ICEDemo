@@ -21,8 +21,10 @@
 			<map>
 				<entry key="Ice.MessageSizeMax" value="0" />
 				<entry key="Ice.BatchAutoFlush" value="10000" />
-				<entry key="Ice.ThreadPool.Server.Size" value="1" />
-				<entry key="Ice.ThreadPool.Client.Size" value="1" />
+				<entry key="Ice.ThreadPool.Server.Size" value="10" />
+				<entry key="Ice.ThreadPool.Server.SizeMax" value="50" />
+				<entry key="Ice.ThreadPool.Client.Size" value="10" />
+				<entry key="Ice.ThreadPool.Client.SizeMax" value="50" />
 			</map>
 		</property>
 	</bean>
